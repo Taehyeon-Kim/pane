@@ -1,0 +1,7 @@
+# Valid test configuration
+enable_mouse = false
+max_recent_skills = 20
+debug_log_enabled = true
+debug_log_path = "/tmp/pane-test.log"
+default_view_mode = "All"
+skill_paths = ["./skills", "~/.pane/skills"]

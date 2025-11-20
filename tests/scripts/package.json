@@ -1,0 +1,27 @@
+{
+  "name": "pane-build-script-tests",
+  "version": "1.0.0",
+  "description": "Automated test suite for Pane build automation scripts",
+  "scripts": {
+    "test": "bats tests/scripts/*.bats",
+    "test:prerequisites": "bats tests/scripts/test_prerequisites.bats",
+    "test:build": "bats tests/scripts/test_build.bats",
+    "test:platform": "bats tests/scripts/test_platform.bats",
+    "test:flags": "bats tests/scripts/test_flags.bats",
+    "test:verbose": "bats -t tests/scripts/*.bats",
+    "test:watch": "watchexec -e bats,sh 'npm test'",
+    "install:bats": "npm install -g bats"
+  },
+  "keywords": [
+    "testing",
+    "bash",
+    "bats",
+    "build-automation"
+  ],
+  "author": "Pane Development Team",
+  "license": "MIT",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

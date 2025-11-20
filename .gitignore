@@ -1,0 +1,99 @@
+# .ignore folder
+.ignore/
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+.vs/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime & Temporary Files
+*.tmp
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.secret
+secrets/
+credentials/
+
+# Dependencies (if applicable)
+node_modules/
+vendor/
+.pnp
+.pnp.js
+
+# Build Output (if applicable)
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# Package Manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Python (if applicable)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+ENV/
+.venv
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Coverage & Testing
+coverage/
+.nyc_output/
+.coverage
+htmlcov/
+
+# Local Development
+.local/
+local/
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+*.pdb
+
+# Homebrew tap (separate repository)
+homebrew-tap/

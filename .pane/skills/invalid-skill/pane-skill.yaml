@@ -1,0 +1,3 @@
+id: invalid-skill
+name: "Invalid Skill - Missing Required Fields"
+# Missing description, exec, ui - should be skipped gracefully

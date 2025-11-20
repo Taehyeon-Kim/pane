@@ -1,0 +1,3 @@
+# Invalid TOML - missing closing bracket
+enable_mouse = false
+max_recent_skills = "not a number"

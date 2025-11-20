@@ -1,0 +1,17 @@
+id: system-info
+name: System Info
+description: Display system information (OS, uptime, resources)
+version: 1.0.0
+exec: ./system-info.sh
+args: []
+tags:
+  - system
+  - info
+  - monitoring
+estimated_time: <1 min
+ui:
+  mode: inline
+  fullscreen: false
+context:
+  pass_cwd: false
+  pass_git_root: false

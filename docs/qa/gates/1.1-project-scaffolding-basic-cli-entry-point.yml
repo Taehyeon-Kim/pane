@@ -1,0 +1,86 @@
+# Quality Gate Decision - Story 1.1
+schema: 1
+story: "1.1"
+story_title: "Project Scaffolding & Basic CLI Entry Point"
+gate: CONCERNS
+status_reason: "Core CLI functionality works correctly, but story scope includes complete Story 1.2 implementation (config.rs), causing test failures and dead code warnings. Requires boundary clarification."
+reviewer: "Quinn (Test Architect)"
+updated: "2025-01-18T18:45:00Z"
+
+waiver: { active: false }
+
+top_issues:
+  - id: "SCOPE-001"
+    severity: high
+    finding: "Story 1.1 includes complete implementation of Story 1.2 (config.rs with 382 lines of config loading logic)"
+    suggested_action: "Remove config.rs from Story 1.1 file list, or move to Story 1.2, or add #[allow(dead_code)] to suppress warnings"
+    suggested_owner: dev
+
+  - id: "TEST-001"
+    severity: high
+    finding: "Test failure: config::tests::test_load_config_invalid_toml_produces_error fails because fixture path resolution doesn't match runtime behavior"
+    suggested_action: "Fix test to properly handle file path or remove config.rs tests from Story 1.1"
+    suggested_owner: dev
+
+  - id: "LINT-001"
+    severity: high
+    finding: "Clippy fails with -D warnings due to dead code (validate, load_config, get_config_path, expand_tilde functions unused in Story 1.1)"
+    suggested_action: "Either remove config.rs or add #[allow(dead_code)] to unused functions meant for Story 1.2"
+    suggested_owner: dev
+
+  - id: "BEHAVIOR-001"
+    severity: medium
+    finding: "main() always prints version regardless of flags, creating confusing behavior when --version or --help is used (clap handles these but never reaches main logic)"
+    suggested_action: "Clarify expected behavior: should main() print message or defer entirely to clap's flag handling?"
+    suggested_owner: dev
+
+risk_summary:
+  totals: { critical: 0, high: 3, medium: 1, low: 0 }
+  recommendations:
+    must_fix:
+      - "Resolve story scope boundary (config.rs belongs to Story 1.2)"
+      - "Fix failing test or remove from Story 1.1"
+      - "Resolve clippy warnings to pass -D warnings requirement"
+    monitor:
+      - "Verify expected CLI behavior for no-argument case"
+
+quality_score: 60
+
+evidence:
+  tests_reviewed: 15
+  tests_passing: 14
+  tests_failing: 1
+  clippy_warnings: 4
+  risks_identified: 4
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "No security-sensitive operations in CLI entry point. Error handling follows best practices (no unwrap/expect)."
+  performance:
+    status: PASS
+    notes: "CLI startup time well under 100ms target. Binary builds with optimizations enabled."
+  reliability:
+    status: CONCERNS
+    notes: "1 failing test reduces confidence in config module reliability. Main CLI logic is solid."
+  maintainability:
+    status: PASS
+    notes: "Code follows Rust idioms, has doc comments, uses proper error handling. Story scope issue creates confusion."
+
+recommendations:
+  immediate:
+    - action: "Resolve config.rs scope violation - either remove from Story 1.1 or add to Story 1.2"
+      refs: ["src/config.rs:1-383"]
+    - action: "Fix test_load_config_invalid_toml_produces_error or remove from Story 1.1"
+      refs: ["src/config.rs:294-311"]
+    - action: "Add #[allow(dead_code)] to config.rs functions or remove module entirely from Story 1.1"
+      refs: ["src/config.rs:121", "src/config.rs:164", "src/config.rs:192", "src/config.rs:203"]
+
+  future:
+    - action: "Consider whether main() should print welcome message when no args, or stay silent and defer to clap"
+      refs: ["src/main.rs:11-18"]
+    - action: "Add integration tests in tests/ directory for complete CLI workflows"
+      refs: []

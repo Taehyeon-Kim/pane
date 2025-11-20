@@ -1,0 +1,19 @@
+id: git-status-inline
+name: Git Status
+description: Show current git repository status inline
+version: 1.0.0
+exec: git
+args:
+  - status
+  - --short
+tags:
+  - git
+  - status
+  - vcs
+estimated_time: <1 min
+ui:
+  mode: inline
+  fullscreen: false
+context:
+  pass_cwd: true
+  pass_git_root: true

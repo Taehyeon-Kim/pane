@@ -1,0 +1,40 @@
+[workspace]
+members = [".", "skills/claude-tips"]
+
+[package]
+name = "pane"
+version = "0.1.0"
+edition = "2021"
+authors = ["Pane Contributors"]
+description = "A blazing-fast TUI skill launcher for developers"
+license = "MIT"
+repository = "https://github.com/Taehyeon-Kim/pane"
+homepage = "https://github.com/Taehyeon-Kim/pane"
+readme = "README.md"
+keywords = ["cli", "tui", "launcher", "productivity"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+clap = { version = "4.5.0", features = ["derive"] }
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9.0"
+toml = "0.7"
+regex = "1.0"
+walkdir = "2.4"
+tracing = "0.1"
+ratatui = "0.26.0"
+crossterm = "0.27.0"
+nucleo-matcher = "0.2.0"
+git2 = "0.18.0"
+
+[dev-dependencies]
+tempfile = "3.8"
+rstest = "0.18.0"
+serial_test = "3.0"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

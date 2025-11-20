@@ -1,0 +1,15 @@
+# Test configuration with custom theme
+enable_mouse = true
+max_recent_skills = 15
+debug_log_enabled = false
+
+[theme]
+primary = "Cyan"
+secondary = "Blue"
+highlight = "DarkGray"
+border = "Gray"
+text = "White"
+text_dim = "DarkGray"
+tag_bg = "Blue"
+tag_fg = "White"
+border_style = "Rounded"

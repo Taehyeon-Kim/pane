@@ -1,0 +1,6 @@
+id: claude-tips
+name: Claude Code Tips
+description: Browse and search Claude Code tips and tricks
+exec: ./claude-tips
+ui:
+  mode: tui

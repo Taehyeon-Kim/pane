@@ -1,0 +1,125 @@
+# Quality Gate Decision - Story 5.1
+# Schema version 1
+
+schema: 1
+story: "5.1"
+story_title: "Installation & Uninstallation Scripts"
+gate: CONCERNS
+status_reason: "High-quality implementation with excellent architecture and documentation, but AC #9 requires testing on both macOS AND Linux - Linux testing is incomplete. Manual validation checklist also has unchecked items."
+reviewer: "Quinn (Test Architect)"
+updated: "2025-11-19T10:45:00Z"
+
+waiver: { active: false }
+
+top_issues:
+  - id: "TEST-001"
+    severity: medium
+    finding: "AC #9 incomplete: Linux testing not performed (all test tasks marked pending)"
+    suggested_action: "Complete Linux testing in Ubuntu/Debian environment or similar"
+    suggested_owner: dev
+    refs: ["docs/stories/5.1.story.md:96-101"]
+
+  - id: "TEST-002"
+    severity: medium
+    finding: "Manual validation checklist incomplete (9 of 10 items unchecked)"
+    suggested_action: "Complete manual validation including TUI skill discovery and standalone claude-tips execution"
+    suggested_owner: dev
+    refs: ["docs/stories/5.1.story.md:364-376"]
+
+  - id: "DOC-001"
+    severity: low
+    finding: "Scripts use bash-specific features (local keyword, read -r) but claim pure POSIX compatibility"
+    suggested_action: "Update documentation to clarify 'bash scripts with broad compatibility' vs 'pure POSIX sh'"
+    suggested_owner: dev
+    refs: ["scripts/install.sh:1", "scripts/uninstall.sh:1"]
+
+# Quality score: 100 - (10 × 2 medium) - (10 × 1 low) = 70
+quality_score: 70
+expires: "2025-12-03T00:00:00Z"
+
+evidence:
+  tests_reviewed: 8
+  risks_identified: 3
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8, 10]
+    ac_gaps: [9]
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "Permission checks implemented, no sensitive data exposure, safe PATH handling, input validation on CLI args"
+  performance:
+    status: PASS
+    notes: "Fast execution with simple file operations, no performance concerns"
+  reliability:
+    status: PASS
+    notes: "Robust rollback mechanism, idempotent operations, clear error messages, proper exit codes"
+  maintainability:
+    status: PASS
+    notes: "Excellent code organization, comprehensive documentation, consistent conventions"
+
+recommendations:
+  immediate:
+    - action: "Complete Linux testing to satisfy AC #9"
+      refs: ["docs/stories/5.1.story.md:96-101", "docs/stories/5.1.story.md:364-376"]
+
+    - action: "Verify skill discovery in Pane TUI after installation"
+      refs: ["docs/stories/5.1.story.md:92-93", "docs/stories/5.1.story.md:370"]
+
+    - action: "Test standalone claude-tips binary execution"
+      refs: ["docs/stories/5.1.story.md:91", "docs/stories/5.1.story.md:369"]
+
+  future:
+    - action: "Consider implementing PANE_DEBUG environment variable support for verbose logging"
+      refs: ["docs/stories/5.1.story.md:229"]
+
+    - action: "Add file integrity validation (checksums) for enhanced security in future versions"
+      refs: ["scripts/install.sh:100-112"]
+
+    - action: "Refine POSIX compatibility documentation to accurately reflect bash dependency"
+      refs: ["docs/stories/5.1.story.md:236-241"]
+
+code_quality_highlights:
+  strengths:
+    - "Excellent error handling with comprehensive rollback mechanism"
+    - "Clear user feedback with color-coded informational messages"
+    - "Idempotent design - safe to run multiple times"
+    - "Thorough input validation and permission checking"
+    - "Well-organized functions following single responsibility principle"
+    - "Comprehensive --help documentation built-in"
+    - "PATH validation with actionable user guidance"
+    - "README documentation is complete and user-friendly"
+
+  technical_excellence:
+    - "Proper use of set -e and set -u for error detection"
+    - "Consistent error message formatting with actionable troubleshooting hints"
+    - "Existing installation detection with upgrade prompting"
+    - "Dry-run mode for safe testing"
+    - "Custom prefix support for flexible installation"
+
+  areas_for_improvement:
+    - "Bash-specific features (local, read -r) limit pure POSIX compatibility claims"
+    - "Could benefit from PANE_DEBUG logging for troubleshooting"
+    - "No file integrity validation (acceptable for MVP)"
+
+testing_summary:
+  manual_tests_passed: 8
+  manual_tests_pending: 3
+  platforms_tested: ["macOS"]
+  platforms_pending: ["Linux"]
+  test_categories_covered:
+    - "Clean installation"
+    - "Custom prefix installation"
+    - "Dry-run mode"
+    - "Upgrade scenario"
+    - "Error handling"
+    - "Uninstallation"
+    - "POSIX syntax validation"
+    - "Permission handling"
+
+acceptance_criteria_status:
+  total: 10
+  met: 9
+  partial: 1
+  gaps:
+    - "AC #9: Linux testing incomplete"

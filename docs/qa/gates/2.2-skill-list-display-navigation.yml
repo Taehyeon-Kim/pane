@@ -1,0 +1,86 @@
+schema: 1
+story: '2.2'
+story_title: 'Skill List Display & Navigation'
+gate: PASS
+status_reason: 'Critical scroll offset bugs identified and fixed during review. All 7 core ACs met (AC7 mouse support acceptably skipped as nice-to-have).'
+reviewer: 'Quinn (Test Architect)'
+updated: '2025-01-18T19:00:00Z'
+
+top_issues:
+  - severity: low
+    category: performance
+    description: 'Fixed page size of 10 items should be calculated dynamically based on terminal height'
+    refs: ['src/app.rs:86-89']
+    suggested_owner: dev
+    blocking: false
+
+waiver:
+  active: false
+
+quality_score: 90
+expires: '2025-02-01T19:00:00Z'
+
+evidence:
+  tests_reviewed: 7
+  risks_identified: 2
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 8]
+    ac_gaps: [7]  # Mouse support - documented as nice-to-have, acceptable
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'No security concerns - UI layer with no sensitive operations'
+  performance:
+    status: PASS
+    notes: 'O(1) scroll calculations, efficient ratatui rendering. Minor optimization opportunity with dynamic page size.'
+  reliability:
+    status: PASS
+    notes: 'Proper error handling, no unwrap/expect in application code, comprehensive edge case testing'
+  maintainability:
+    status: PASS
+    notes: 'Excellent documentation, clean separation of concerns, strong test coverage, follows Rust idioms'
+
+recommendations:
+  immediate: []  # All critical issues fixed during QA review
+  future:
+    - action: 'Calculate page size dynamically based on terminal height instead of fixed 10 items'
+      refs: ['src/app.rs:86-89']
+      priority: low
+      rationale: 'Would improve UX on various terminal sizes, but fixed size works acceptably for MVP'
+    - action: 'Consider integration test for scroll rendering behavior'
+      refs: ['tests/integration/']
+      priority: low
+      rationale: 'Manual testing sufficient for MVP, but automated test would catch regressions'
+
+review_notes: |
+  Comprehensive review identified and fixed two critical bugs:
+
+  1. CRITICAL (FIXED): Scroll offset was calculated but never applied to List widget rendering
+     - Root cause: Missing `ListState::with_offset()` call
+     - Impact: AC #8 auto-scrolling would not work
+     - Fix: Added scroll_offset parameter to render_skill_list() and applied via ListState
+
+  2. CRITICAL (FIXED): Single-item navigation didn't update scroll offset
+     - Root cause: move_selection_up/down() lacked scroll offset update logic
+     - Impact: Selection would move off-screen when navigating with arrow/vim keys
+     - Fix: Added scroll boundary checks in navigation methods
+
+  Post-fix verification:
+  - All refactorings compile successfully
+  - cargo clippy -D warnings: PASS
+  - cargo fmt: PASS
+  - 7 unit tests covering page navigation, scroll offset, input mapping
+
+  Code quality excellent:
+  - Clean, well-documented implementation
+  - No unwrap/expect in application code
+  - Proper error handling with anyhow::Result
+  - Good test coverage with AAA pattern
+  - Follows all Rust coding standards
+
+  Gate Decision: PASS
+  - 7 of 8 ACs met (AC7 mouse support acceptably skipped)
+  - All critical bugs fixed during review
+  - Strong test coverage and code quality
+  - Ready for production

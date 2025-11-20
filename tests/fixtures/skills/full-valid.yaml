@@ -1,0 +1,21 @@
+id: my-skill
+name: My Awesome Skill
+description: This is a comprehensive example skill manifest
+version: 1.2.3
+exec: /usr/local/bin/my-skill
+args:
+  - --verbose
+  - --color
+tags:
+  - productivity
+  - development
+  - automation
+estimated_time: 2-5 min
+ui:
+  mode: tui
+  fullscreen: true
+context:
+  pass_cwd: true
+  pass_git_root: true
+  pass_project_name: true
+  pass_stdin_json: false

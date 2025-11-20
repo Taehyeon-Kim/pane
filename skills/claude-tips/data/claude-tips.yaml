@@ -1,0 +1,154 @@
+- id: "cc-001"
+  title: "막연한 요청 피하기"
+  category: "prompting"
+  text: |
+    복잡한 요청은 구체적인 단계로 나누세요. "웹앱 만들어줘" 대신
+    "이름과 아바타를 표시하는 React 컴포넌트 만들어줘"처럼 구체적으로 요청하세요.
+    구체적인 프롬프트가 더 정확하고 타겟팅된 응답을 만듭니다.
+  tags: ["claude", "prompting", "workflow"]
+
+- id: "cc-002"
+  title: "/help 명령어로 기능 탐색하기"
+  category: "workflow"
+  text: |
+    Claude Code는 워크플로우를 향상시키는 많은 슬래시 명령어를 제공합니다.
+    언제든지 /help를 입력하여 사용 가능한 명령어와 설명을 확인하세요.
+    /commit, /fix, /test 같은 명령어가 자주 사용됩니다.
+  tags: ["claude", "commands", "productivity"]
+
+- id: "cc-003"
+  title: "커밋 전 변경사항 검토하기"
+  category: "workflow"
+  text: |
+    Claude Code가 제안한 변경사항을 수락하기 전에 항상 검토하세요.
+    에디터의 diff 뷰나 git diff를 사용하여 무엇이 바뀔지 확인하세요.
+    이는 학습에 도움이 되고 의도하지 않은 수정을 잡아낼 수 있습니다.
+  tags: ["git", "workflow", "best-practices"]
+
+- id: "cc-004"
+  title: "더 나은 결과를 위한 컨텍스트 제공"
+  category: "prompting"
+  text: |
+    Claude Code에 코드 수정을 요청할 때 관련 컨텍스트를 포함하세요:
+    - 현재 코드가 하는 일
+    - 대신 원하는 동작
+    - 제약사항이나 요구사항
+    더 많은 컨텍스트가 더 정확한 구현으로 이어집니다.
+  tags: ["prompting", "context", "workflow"]
+
+- id: "cc-005"
+  title: "반복적인 개선 요청하기"
+  category: "prompting"
+  text: |
+    첫 시도에서 완벽을 기대하지 마세요. 피드백을 바탕으로 Claude Code에
+    결과물을 개선하도록 요청하세요. 예: "에러 핸들링을 더 견고하게 만들어줘"나
+    "이 함수에 입력 검증 추가해줘". 반복이 더 나은 결과를 만듭니다.
+  tags: ["prompting", "iterative", "refinement"]
+
+- id: "cc-006"
+  title: "학습을 위한 설명 요청하기"
+  category: "prompting"
+  text: |
+    Claude Code가 변경을 만들었을 때 "왜 이렇게 구현했어?"라고 물어보세요.
+    코드 결정 뒤의 이유를 이해하면 새로운 패턴과 기술을 배울 수 있습니다.
+    이는 코딩 세션을 학습 기회로 만듭니다.
+  tags: ["prompting", "learning", "explanations"]
+
+- id: "cc-007"
+  title: "집중 작업을 위한 컨텍스트 윈도우 제한"
+  category: "cost"
+  text: |
+    작은 섹션만 수정하려면 전체 큰 파일을 로드하지 마세요.
+    어떤 함수나 클래스를 변경할지 구체적으로 명시하세요. 이는 토큰 사용을
+    줄이고 응답을 관련 코드에 집중시킵니다.
+  tags: ["cost", "tokens", "optimization", "context"]
+
+- id: "cc-008"
+  title: "반복 작업은 배치로 처리하기"
+  category: "cost"
+  text: |
+    비슷한 요청을 여러 번 하는 대신 함께 묶으세요. 예를 들어:
+    "함수 A, B, C에 에러 핸들링 추가해줘"를 세 번 나눠 요청하지 말고 한 번에.
+    이는 토큰을 절약하고 중복 컨텍스트 로딩을 줄입니다.
+  tags: ["cost", "efficiency", "batch", "tokens"]
+
+- id: "cc-009"
+  title: "사용하지 않는 대화 스레드 닫기"
+  category: "cost"
+  text: |
+    긴 대화 기록은 매 요청마다 토큰을 소비합니다. 새 작업으로 전환할 때는
+    새로운 대화를 시작하세요. 이는 컨텍스트를 관련성 있게 유지하고
+    무관한 과거 메시지의 토큰 사용을 최소화합니다.
+  tags: ["cost", "tokens", "context", "management"]
+
+- id: "cc-010"
+  title: "워크플로우에 슬래시 명령어 활용하기"
+  category: "workflow"
+  text: |
+    매번 긴 지시사항을 작성하는 대신 /commit, /fix, /test 같은 내장 슬래시
+    명령어를 사용하세요. 이 명령어들은 일반 작업에 최적화되어 있고
+    적은 토큰 오버헤드로 더 빠르게 실행됩니다.
+  tags: ["workflow", "commands", "efficiency", "automation"]
+
+- id: "cc-011"
+  title: "커밋 전 빌드 상태 확인하기"
+  category: "debugging"
+  text: |
+    코드를 커밋하기 전에 컴파일되고 린팅 검사를 통과하는지 확인하세요.
+    빌드 명령어나 린터를 실행하여 에러를 조기에 잡으세요. 이는 망가진
+    커밋을 방지하고 나중의 디버깅 시간을 줄입니다.
+  tags: ["debugging", "build", "linting", "validation"]
+
+- id: "cc-012"
+  title: "문제 해결 시 디버그 로깅 활성화하기"
+  category: "debugging"
+  text: |
+    Claude Code의 변경이 예상대로 작동하지 않으면, 실행 흐름을 추적하는
+    디버그 로깅을 추가하도록 요청하세요. 이는 로직이 예상과 어디서 다른지
+    드러내고 근본 원인을 빠르게 찾는 데 도움이 됩니다.
+  tags: ["debugging", "logging", "troubleshooting"]
+
+- id: "cc-013"
+  title: "에러 경로를 명시적으로 테스트하기"
+  category: "debugging"
+  text: |
+    정상 경로만 테스트하지 마세요. Claude Code에 에러 조건, 엣지 케이스,
+    잘못된 입력에 대한 테스트 케이스를 추가하도록 요청하세요. 이는 프로덕션
+    전에 버그를 발견하고 견고한 에러 핸들링을 보장합니다.
+  tags: ["debugging", "testing", "edge-cases", "errors"]
+
+- id: "cc-014"
+  title: "코드 리뷰 코멘트 요청하기"
+  category: "best-practices"
+  text: |
+    Claude Code에 코드를 검토하고 개선사항을 제안하도록 요청하세요.
+    가독성, 성능, 보안에 대한 구체적인 피드백을 요청하세요. 이는 새로운
+    시각을 제공하고 놓친 문제를 발견하는 데 도움이 됩니다.
+  tags: ["best-practices", "review", "quality", "feedback"]
+
+- id: "cc-015"
+  title: "일관된 코드 스타일 유지하기"
+  category: "best-practices"
+  text: |
+    세션 시작 시 프로젝트의 코딩 표준을 Claude Code에 알려주세요.
+    예: "PEP 8 스타일 따르기"나 "React에서 함수형 컴포넌트 사용".
+    일관된 스타일은 유지보수성과 팀 협업을 향상시킵니다.
+  tags: ["best-practices", "style", "standards", "consistency"]
+
+- id: "cc-016"
+  title: "복잡한 로직에 주석으로 문서화하기"
+  category: "best-practices"
+  text: |
+    Claude Code가 복잡한 알고리즘이나 비즈니스 로직을 생성하면, 설명
+    주석을 추가하도록 요청하세요. 명확한 문서는 미래의 유지보수자가 코드의
+    목적과 구현 결정을 이해하는 데 도움이 됩니다.
+  tags: ["best-practices", "documentation", "comments", "clarity"]
+
+- id: "cc-017"
+  title: "Git 통합으로 원활한 커밋하기"
+  category: "workflow"
+  text: |
+    /commit 명령어로 Claude Code가 Git 워크플로우를 처리하도록 하세요.
+    변경사항을 기반으로 의미있는 커밋 메시지를 생성하고 스테이징을 자동으로
+    처리합니다. 이는 버전 관리를 간소화하고 깔끔한 커밋 이력을 유지합니다.
+  tags: ["workflow", "git", "commit", "integration"]

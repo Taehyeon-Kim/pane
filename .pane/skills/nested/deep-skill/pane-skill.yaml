@@ -1,0 +1,17 @@
+id: nested-skill
+name: Nested Skill Example
+description: A skill in a nested directory to test recursive discovery
+version: 0.1.0
+exec: ls
+args:
+  - "-la"
+tags:
+  - filesystem
+  - demo
+ui:
+  mode: inline
+context:
+  pass_cwd: true
+  pass_git_root: false
+  pass_project_name: false
+  pass_stdin_json: false

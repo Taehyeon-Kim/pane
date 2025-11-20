@@ -1,0 +1,19 @@
+id: hello-world
+name: Hello World Skill
+description: A simple test skill that prints hello world
+version: 1.0.0
+exec: echo
+args:
+  - "Hello from Pane!"
+tags:
+  - demo
+  - test
+estimated_time: "< 1s"
+ui:
+  mode: inline
+  fullscreen: false
+context:
+  pass_cwd: true
+  pass_git_root: false
+  pass_project_name: false
+  pass_stdin_json: false
