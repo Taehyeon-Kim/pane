@@ -129,7 +129,14 @@ mod tests {
         // Act & Assert - rendering should complete without panic
         terminal
             .draw(|frame| {
-                render_footer(frame.size(), frame, &view_mode, &input_mode, &translations, &theme);
+                render_footer(
+                    frame.size(),
+                    frame,
+                    &view_mode,
+                    &input_mode,
+                    &translations,
+                    &theme,
+                );
             })
             .unwrap();
     }
@@ -147,7 +154,14 @@ mod tests {
         // Act & Assert - rendering should complete without panic
         terminal
             .draw(|frame| {
-                render_footer(frame.size(), frame, &view_mode, &input_mode, &translations, &theme);
+                render_footer(
+                    frame.size(),
+                    frame,
+                    &view_mode,
+                    &input_mode,
+                    &translations,
+                    &theme,
+                );
             })
             .unwrap();
     }
@@ -165,7 +179,14 @@ mod tests {
         // Act & Assert - rendering should complete without panic
         terminal
             .draw(|frame| {
-                render_footer(frame.size(), frame, &view_mode, &input_mode, &translations, &theme);
+                render_footer(
+                    frame.size(),
+                    frame,
+                    &view_mode,
+                    &input_mode,
+                    &translations,
+                    &theme,
+                );
             })
             .unwrap();
     }
@@ -183,7 +204,14 @@ mod tests {
         // Act & Assert - rendering should complete without panic
         terminal
             .draw(|frame| {
-                render_footer(frame.size(), frame, &view_mode, &input_mode, &translations, &theme);
+                render_footer(
+                    frame.size(),
+                    frame,
+                    &view_mode,
+                    &input_mode,
+                    &translations,
+                    &theme,
+                );
             })
             .unwrap();
     }
@@ -201,7 +229,14 @@ mod tests {
         // Act & Assert - rendering should complete without panic
         terminal
             .draw(|frame| {
-                render_footer(frame.size(), frame, &view_mode, &input_mode, &translations, &theme);
+                render_footer(
+                    frame.size(),
+                    frame,
+                    &view_mode,
+                    &input_mode,
+                    &translations,
+                    &theme,
+                );
             })
             .unwrap();
     }
@@ -219,7 +254,14 @@ mod tests {
         // Act & Assert - rendering should complete without panic
         terminal
             .draw(|frame| {
-                render_footer(frame.size(), frame, &view_mode, &input_mode, &translations, &theme);
+                render_footer(
+                    frame.size(),
+                    frame,
+                    &view_mode,
+                    &input_mode,
+                    &translations,
+                    &theme,
+                );
             })
             .unwrap();
     }

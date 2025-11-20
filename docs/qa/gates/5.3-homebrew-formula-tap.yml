@@ -1,0 +1,138 @@
+# Quality Gate Decision - Story 5.3: Homebrew Formula & Tap
+schema: 1
+story: "5.3"
+story_title: "Homebrew Formula & Tap"
+gate: CONCERNS
+status_reason: "Implementation is excellent and production-ready, but pending manual testing on all platforms and GitHub repository setup. Placeholder checksums require updates before public release."
+reviewer: "Quinn (Test Architect)"
+updated: "2025-11-20T00:00:00Z"
+
+# Issues requiring attention before production release
+top_issues:
+  - id: "DEPLOY-001"
+    severity: medium
+    finding: "Placeholder SHA256 checksums in formula for x86_64-darwin and x86_64-linux platforms"
+    suggested_action: "Build on all platforms and update formula with actual checksums (or automate in Story 5.4)"
+    suggested_owner: dev
+
+  - id: "TEST-001"
+    severity: medium
+    finding: "Manual testing pending on all platforms (macOS Intel, macOS ARM64, Linux x86_64)"
+    suggested_action: "Execute manual test checklist on all supported platforms before public release"
+    suggested_owner: dev
+
+  - id: "INFRA-001"
+    severity: medium
+    finding: "GitHub repository homebrew-pane not yet created - blocks formula testing"
+    suggested_action: "Create GitHub repository and push tap files from homebrew-tap/ directory"
+    suggested_owner: dev
+
+# Waiver not applicable - issues are addressable
+waiver:
+  active: false
+
+# Quality score: 100 - (10 × 3 medium concerns) = 70
+quality_score: 70
+expires: "2025-12-04T00:00:00Z"
+
+# Evidence from review
+evidence:
+  tests_reviewed: 5  # Formula test block assertions
+  risks_identified: 3
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 7, 10]  # Completed programmatically
+    ac_gaps: [6, 8, 9]  # Pending manual testing
+
+# NFR Validation Results
+nfr_validation:
+  security:
+    status: PASS
+    notes: "SHA256 checksums protect archive integrity. HTTPS downloads. No sensitive data exposure. Static binaries eliminate runtime dependency vulnerabilities."
+  performance:
+    status: PASS
+    notes: "Efficient distribution: ~1.7MB compressed archive. Homebrew caching provides fast installs. No application performance impact."
+  reliability:
+    status: PASS
+    notes: "Robust error handling in build script. Platform detection with clear errors. Test block validates installation. Comprehensive verification steps."
+  maintainability:
+    status: PASS
+    notes: "Excellent code organization. Clear separation of concerns. Well-documented. Future-ready for CI/CD automation (Story 5.4)."
+
+# Risk assessment summary
+risk_summary:
+  totals:
+    critical: 0
+    high: 0
+    medium: 3
+    low: 0
+  highest: medium
+  recommendations:
+    must_fix:
+      - "Complete platform builds and update SHA256 checksums"
+      - "Create GitHub homebrew-pane repository"
+      - "Execute manual testing on all 3 platforms"
+    monitor:
+      - "Pre-existing flaky test in config module (unrelated to this story)"
+
+# Detailed recommendations
+recommendations:
+  immediate:  # Before public release
+    - action: "Build x86_64-apple-darwin and x86_64-unknown-linux-gnu targets"
+      refs: ["scripts/build-release.sh", "homebrew-tap/Formula/pane.rb:15,21"]
+      rationale: "Formula requires real checksums for installation to succeed"
+
+    - action: "Update formula with actual SHA256 checksums from build-metadata.json"
+      refs: ["homebrew-tap/Formula/pane.rb:15,21"]
+      rationale: "Homebrew will reject placeholder values during installation"
+
+    - action: "Create GitHub repository Taehyeon-Kim/homebrew-pane"
+      refs: ["homebrew-tap/README.md", "homebrew-tap/Formula/pane.rb"]
+      rationale: "Required for tap functionality and formula testing"
+
+    - action: "Execute manual testing checklist on all platforms"
+      refs: ["docs/stories/5.3.story.md#testing"]
+      rationale: "Validate formula works correctly on macOS Intel, macOS ARM64, Linux x86_64"
+
+    - action: "Run brew audit --strict --online pane after repo creation"
+      refs: ["homebrew-tap/Formula/pane.rb"]
+      rationale: "AC 8 requirement - ensure formula passes all Homebrew guidelines"
+
+  future:  # Post-MVP enhancements
+    - action: "Automate checksum updates in Story 5.4 CI/CD pipeline"
+      refs: ["docs/prd/epic-5.md#story-5.4"]
+      rationale: "Eliminate manual checksum updates on each release"
+
+    - action: "Investigate config test flakiness (pre-existing issue)"
+      refs: ["src/config.rs:276"]
+      rationale: "1 flaky test in parallel execution - not blocking but should be resolved"
+
+# Test Architecture Assessment
+test_architecture:
+  formula_test_coverage: excellent
+  test_assertions: 5
+  platforms_tested: 1  # ARM64 macOS only so far
+  platforms_required: 3  # macOS x86_64, macOS ARM64, Linux x86_64
+  automation_readiness: high  # Ready for Story 5.6 E2E testing
+
+# Compliance Status
+compliance:
+  homebrew_dsl: pass
+  ruby_syntax: pass  # Validated with ruby -c
+  archive_structure: pass  # Verified with tar -tzf
+  documentation: pass
+  coding_standards: pass  # N/A for formula (Ruby), pass for Bash script
+
+# Story Status Recommendation
+recommended_status: "Ready for Done (with caveats)"
+caveats:
+  - "Pending manual repository setup (non-code task)"
+  - "Pending platform builds for checksum completion"
+  - "Pending manual testing on all platforms"
+  - "Production release blocked until all manual tasks complete"
+
+next_steps:
+  - "Developer: Create GitHub homebrew-pane repository"
+  - "Developer: Build missing platforms and update checksums"
+  - "Developer: Execute manual testing checklist"
+  - "Developer: Run brew audit and address any violations"
+  - "After manual tasks: Mark story as Complete"

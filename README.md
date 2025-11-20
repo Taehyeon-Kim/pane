@@ -16,23 +16,38 @@ A fast, keyboard-driven TUI launcher for terminal skills and micro-tools.
 
 ### Homebrew (Recommended for macOS/Linux)
 
-Install Pane via Homebrew:
+Install Pane via Homebrew tap:
 
 ```bash
+# Add the Pane tap
 brew tap Taehyeon-Kim/pane
+
+# Install Pane
 brew install pane
 ```
 
-Or install directly without tapping:
+Or install directly without adding the tap:
 
 ```bash
 brew install Taehyeon-Kim/pane/pane
 ```
 
-After installation, run:
+After installation, launch Pane:
 
 ```bash
 pane
+```
+
+**Updating Pane:**
+
+```bash
+brew upgrade pane
+```
+
+**Uninstalling Pane:**
+
+```bash
+brew uninstall pane
 ```
 
 ### Prerequisites (for source installation)
@@ -114,12 +129,39 @@ sudo ./scripts/uninstall.sh --yes
 PREFIX=$HOME/.local ./scripts/uninstall.sh
 ```
 
-### Homebrew Installation
+### Homebrew Troubleshooting
 
-Coming soon in v1.0 release:
-```bash
-brew install pane
-```
+**Common Issues:**
+
+1. **Tap not found:**
+   ```bash
+   # Verify tap was added
+   brew tap
+   # Should show "taehyeon-kim/pane"
+   ```
+
+2. **Checksum mismatch error:**
+   - This indicates the downloaded archive doesn't match expected checksum
+   - Try: `brew fetch --force pane`
+   - If issue persists, report on GitHub Issues
+
+3. **Binary not found after installation:**
+   ```bash
+   # Check installation path
+   which pane
+
+   # Homebrew prefix varies by platform:
+   # macOS Intel: /usr/local/bin/pane
+   # macOS ARM64: /opt/homebrew/bin/pane
+   # Linux: /home/linuxbrew/.linuxbrew/bin/pane
+   ```
+
+4. **Skill discovery issues:**
+   ```bash
+   # Verify skills were installed
+   ls $(brew --prefix)/share/pane/skills/claude-tips/
+   # Should show pane-skill.yaml and data/ directory
+   ```
 
 ### Bundled Skills
 

@@ -18,11 +18,11 @@
 /// let translations = Translations::load(lang);
 /// assert_eq!(translations.app_title, "페인");
 /// ```
-
 /// Supported UI languages
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum Language {
     /// English (default)
+    #[default]
     En,
     /// Korean (한국어)
     Ko,
@@ -79,12 +79,6 @@ impl Language {
             Language::En => "en",
             Language::Ko => "ko",
         }
-    }
-}
-
-impl Default for Language {
-    fn default() -> Self {
-        Language::En
     }
 }
 
@@ -328,7 +322,10 @@ mod tests {
         assert_eq!(translations.search_placeholder, "검색어를 입력하세요...");
         assert_eq!(translations.footer_insert_mode, "-- 입력 --");
         assert_eq!(translations.footer_view_all, "전체");
-        assert_eq!(translations.empty_skills_message, "사용 가능한 스킬이 없습니다");
+        assert_eq!(
+            translations.empty_skills_message,
+            "사용 가능한 스킬이 없습니다"
+        );
     }
 
     #[test]
