@@ -97,3 +97,7 @@ Cargo.lock
 
 # Homebrew tap (separate repository)
 homebrew-tap/
+
+# Development tools (BMad framework)
+.bmad-core/
+.claude/commands/BMad/
